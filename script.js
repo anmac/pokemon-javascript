@@ -1,7 +1,9 @@
+const random = Math.floor(Math.random() * 100) + 1;
 const URL = "https://pokeapi.co/api/v2/pokemon/";
+const URL_LIMITED = URL + "?offset=" + random + "&limit=20";
 
 function getPokemon(generator) {
-  fetch(URL)
+  fetch(URL_LIMITED)
     .then((response) => response.json())
     .then((data) => {
       generator(data);
@@ -9,39 +11,46 @@ function getPokemon(generator) {
     .catch((err) => console.error("Pokemon not found: " + err));
 }
 
-async function getPokemonDetails(pokemon) {
-  const response = await fetch(pokemon.url);
-  const data = await response.json();
-  return data;
-}
-
-async function getPokemonImage(name) {
+async function getPokemonDetails(name) {
   const response = await fetch(URL + name);
   const data = await response.json();
   return data;
 }
 
-getPokemon((data) => {
-  data.results.forEach(async (pokemon) => {
-    const details = await getPokemonDetails(pokemon);
-    const img = await getPokemonImage(pokemon.name);
+function formatName(name) {
+  return name.slice(0, 1).toUpperCase() + name.slice(1);
+}
+
+getPokemon(async (data) => {
+  const fragment = document.createDocumentFragment();
+
+  for (const pokemon of data.results) {
     console.log(pokemon);
-    console.log(img);
+    const details = await getPokemonDetails(pokemon.name);
+    console.log(details);
 
-    const card = document.createRange().createContextualFragment(`
-      <article class="card">
-        <figure class="card__figure">
-          <img
-            src="${img.sprites.other["official-artwork"].front_default}"
-            alt="${pokemon.name}"
-            class="card__img"
-          />
-          <figcaption class="card__caption">${pokemon.name}</figcaption>
-        </figure>
-      </article>
-      `);
+    const card = document.createElement("article");
+    card.classList.add("card");
 
-    const section = document.querySelector("section");
-    section.append(card);
-  });
+    const figure = document.createElement("figure");
+    figure.classList.add("card__figure");
+
+    const img = document.createElement("img");
+    img.src = details.sprites.other["official-artwork"].front_default;
+    img.alt = formatName(pokemon.name);
+    img.classList.add("card__img");
+
+    const figcaption = document.createElement("figcaption");
+    figcaption.classList.add("card__caption");
+    figcaption.textContent = formatName(pokemon.name);
+
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    card.appendChild(figure);
+
+    fragment.appendChild(card);
+  }
+
+  const section = document.querySelector(".section");
+  section.appendChild(fragment);
 });
