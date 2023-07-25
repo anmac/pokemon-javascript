@@ -1,0 +1,72 @@
+:root {
+  --very-dark-blue: hsl(234, 12%, 34%);
+  --soft-dark-blue: hsl(234, 43%, 74%);
+  --grayish-blue: hsl(229, 6%, 66%);
+  --very-light-gray: hsl(0, 0%, 98%);
+  --bg-color: #181623;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 86%;
+  min-height: 100vh;
+  padding: 1rem 0 2rem;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+  /* font-size: 15px; */
+  background-color: var(--bg-color);
+  color: var(--very-light-gray);
+}
+
+.header {
+}
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.8rem;
+}
+
+.card {
+  width: fit-content;
+  color: var(--bg-color);
+  outline: 4px solid var(--very-dark-blue);
+  outline-offset: -4px;
+  border-radius: 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(232, 238, 253, 1) 0%,
+    rgba(232, 238, 253, 1) 7%,
+    rgba(203, 212, 246, 1) 47%,
+    rgba(190, 204, 244, 1) 71%,
+    rgba(180, 205, 243, 1) 100%
+  );
+  transition: background 0.8s;
+  cursor: pointer;
+}
+
+.card__figure {
+  margin: 0 auto;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.card__img {
+  max-width: 140px;
+  height: auto;
+}
+
+.card__caption {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.card:hover {
+  background: var(--soft-dark-blue);
+  box-shadow: 2px 2px 12px 2px var(--grayish-blue);
+  color: var(--very-light-gray);
+}
