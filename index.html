@@ -9,6 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,0"
+    />
     <link rel="stylesheet" href="./normalize.css" />
     <link rel="stylesheet" href="./styles.css" />
     <title>Pokemon API with JavaScript</title>
@@ -19,7 +23,11 @@
     </header>
     <main class="main">
       <h2 class="main__title">List of Pokemons</h2>
-      <section class="section"></section>
+      <button id="reload" class="main__reload-button">
+        <span class="material-symbols-outlined"> refresh </span>
+      </button>
+      <section class="section slider-container"></section>
+      <section class="detail"></section>
     </main>
     <script src="./script.js"></script>
   </body>
