@@ -152,13 +152,14 @@ body {
 }
 
 .detail__list {
+  padding: 0 16px;
   list-style: none;
   text-align: left;
 }
 
 .item {
   margin: 8px 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 
 .item__bold {
