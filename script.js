@@ -32,9 +32,7 @@ async function createPokemonCards(data) {
   const fragment = document.createDocumentFragment();
 
   for (const pokemon of data.results) {
-    // console.log(pokemon);
     const details = await getPokemonDetails(pokemon.name);
-    // console.log(details);
 
     const card = document.createElement("article");
     card.classList.add("card");
@@ -66,7 +64,43 @@ async function createPokemonCards(data) {
   spinner.classList.remove("loading");
 }
 
-async function createSpeciesDetails(data) {}
+async function createSpeciesDetailsCards(pokemonName, img) {
+  const pokemonDetail = await getPokemonSpeciesDetails(pokemonName);
+
+  const article = `
+    <article>
+      <h3 class="detail__title">${pokemonName}</h3>
+      <ul class="detail__list">
+        <li class="item"><span class="item__bold">Color: </span>${pokemonDetail.color.name}</li>
+        <li class="item"><span class="item__bold">Habitat: </span>${pokemonDetail.habitat.name}</li>
+        <li class="item"><span class="item__bold">Species: </span>${pokemonDetail["egg_groups"][0].name}</li>
+        <li class="item"><span class="item__bold">Shape: </span>${pokemonDetail.shape.name}</li>
+        <li class="item"><span class="item__bold">Description: </span>${pokemonDetail["flavor_text_entries"][0]["flavor_text"]}</li>
+      </ul>
+    </article>
+  `;
+
+  const image = `
+    <figure>
+      <img
+        src="${img}"
+        alt="${pokemonName}"
+      />
+    </figure>
+  `;
+
+  const fragment = document.createDocumentFragment();
+  const articleElement = document
+    .createRange()
+    .createContextualFragment(article);
+  const imageElement = document.createRange().createContextualFragment(image);
+  fragment.appendChild(articleElement);
+  fragment.appendChild(imageElement);
+
+  const section = document.querySelector(".detail");
+  section.innerHTML = "";
+  section.appendChild(fragment);
+}
 
 function getPokemonDataAndCreateCards() {
   const spinner = document.querySelector(".material-symbols-outlined");
@@ -82,7 +116,8 @@ function getPokemonSpecieDetailAndCreateCard(event) {
   const pokemonName = card
     .querySelector(".card__caption")
     .textContent.toLowerCase();
-  createSpeciesDetails(pokemonName);
+  const imgSrc = card.querySelector(".card__img").getAttribute("src");
+  createSpeciesDetailsCards(pokemonName, imgSrc);
 }
 
 getPokemonDataAndCreateCards();
