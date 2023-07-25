@@ -12,9 +12,10 @@
 
 body {
   width: 86%;
+  min-width: 480px;
   min-height: 100vh;
-  padding: 1rem 0 2rem;
-  margin: auto;
+  padding: 1rem;
+  margin: 0 auto;
   font-family: "Poppins", sans-serif;
   /* font-size: 15px; */
   background-color: var(--bg-color);
@@ -22,6 +23,46 @@ body {
 }
 
 .header {
+}
+
+.main {
+  text-align: center;
+}
+
+.main__reload-button {
+  width: 46px;
+  height: 46px;
+  padding: 8px;
+  background-color: rgba(190, 204, 244, 0.9);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.main__reload-button:hover {
+  background-color: rgb(167, 190, 255);
+}
+
+.main__reload-button:active {
+  transform: scale(0.8);
+}
+
+.material-symbols-outlined {
+  font-size: 30px;
+}
+
+.material-symbols-outlined.loading {
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .section {
@@ -32,6 +73,7 @@ body {
   gap: 1.8rem;
   overflow-x: scroll;
   overscroll-behavior-inline: contain;
+  margin-bottom: 1.4rem;
 }
 
 .slider-container {
@@ -83,6 +125,45 @@ body {
   background: var(--soft-dark-blue);
   box-shadow: 2px 2px 12px 2px var(--grayish-blue);
   color: var(--very-light-gray);
+}
+
+.detail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  max-width: 500px;
+  max-height: 600px;
+  margin: 0 auto;
+  background-color: var(--very-dark-blue);
+  border-radius: 16px;
+}
+
+.detail__title {
+  text-transform: uppercase;
+}
+
+.detail figure {
+  margin: 0;
+}
+
+.detail img {
+  max-width: 460px;
+  height: auto;
+}
+
+.detail__list {
+  list-style: none;
+  text-align: left;
+}
+
+.item {
+  margin: 8px 0;
+  font-size: 1.2rem;
+}
+
+.item__bold {
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
 body::-webkit-scrollbar {
