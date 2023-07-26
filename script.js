@@ -41,7 +41,6 @@ async function getPokemonSpeciesDetails(name) {
 async function createPokemonCards(data) {
   const fragment = document.createDocumentFragment();
   const section = document.querySelector(".section");
-  section.innerHTML = "";
 
   for (const pokemon of data) {
     const details = await getPokemonDetails(pokemon.name);
@@ -74,6 +73,7 @@ async function createPokemonCards(data) {
     fragment.appendChild(card);
   }
 
+  section.innerHTML = "";
   section.appendChild(fragment);
 }
 
