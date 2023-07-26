@@ -88,6 +88,7 @@ async function showPokemonSpeciesDetails(pokemonName, imgSrc) {
 
   h3.classList.add("detail__title");
   h3.textContent = capitalizeName(pokemonName);
+  ul.classList.add("detail__list");
 
   const details = [
     { label: "Color", value: pokemonSpeciesDetails.color.name },
